@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {# esse comando ajusta a tela para zoom = 100% no responsivo/mobile. Faça o teste sem ele pra entender #}
+    <link href="{{ STATIC_URL }}customer/plugins/mdb/css/mdb.min.css" rel="stylesheet"/>
+    <link href="{{ STATIC_URL }}customer/css/style.css" />
+
+    <title>Management Jobs</title>
 </head>
 <body>
+    {% block navbar %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <botton class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#myNavButtons" aria-controls="myNavButtons" aria-expanded="false" aria-label="Toggle navigation" ><i class="fas fa-bars"></i></botton>
+                <div class="collapse navbar-collapse" id="myNavButtons">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'customer:index' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'customer:customer_list' %}">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Jobs</a>
+                        </li>
 
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    {% endblock navbar %}
+
+
+    <section id="container" class="container-fluid">
+        {% block content %}
+        {% endblock content %}
+    </section>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}customer/plugins/mdb/js/mdb.min.js"></script>
 </body>
 </html>
