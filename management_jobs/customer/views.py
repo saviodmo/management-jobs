@@ -30,3 +30,47 @@ def customer_job(request, slug):
     template_name = 'customer/customer_job.html'
 
     return render(request, template_name, context)
+
+
+def edit_customer(request, slug):
+    context = {}
+    customer = get_object_or_404(Customer, slug=slug)
+
+    context['customer'] = customer
+
+    template_name = 'customer/edit_customer.html'
+
+    return render(request, template_name, context)
+
+
+def add_customer(request):
+    context = {}
+    template_name = 'customer/add_customer.html'
+    return render(request, template_name, context)
+
+
+def job_list(request):
+    context = {}
+    jobs = Job.objects.order_by('dtt_record')
+
+    context['jobs'] = jobs
+    template_name = 'customer/job.html'
+
+    return render(request, template_name, context)
+
+
+def edit_job(request, slug):
+    context = {}
+    job = get_object_or_404(Job, slug=slug)
+
+    context['job'] = job
+
+    template_name = 'customer/edit_job.html'
+
+    return render(request, template_name, context)
+
+
+def add_job(request):
+    context = {}
+    template_name = 'customer/add_job.html'
+    return render(request, template_name, context)

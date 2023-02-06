@@ -6,7 +6,7 @@ from .models import Customer, Job, CustomerJob
 
 @admin.register(Job)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'dtt_record']
+    list_display = ['name', 'price', 'dtt_record', 'slug']
 
 
 # @admin.register(ClientServices)

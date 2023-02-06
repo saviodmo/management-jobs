@@ -24,12 +24,17 @@ class Customer(models.Model):
 class Job(models.Model):
     name = models.CharField("Serviço", max_length=200)
     price = models.DecimalField("Valor Cobrado", max_digits=10, decimal_places=2)
+    slug = models.SlugField('Slug', max_length=200, unique=True, blank=True,
+                            help_text='Adicione uma slug com palavras separadas por hifens para ou deixe em branco para preenchimento automático.')
     dtt_record = models.DateTimeField("Data de Inserção", auto_now_add=True, blank=True)
 
     objects = models.Manager()
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('job:job', args=[self.slug])
 
 
 class CustomerJob(models.Model):
@@ -42,6 +47,8 @@ class CustomerJob(models.Model):
 
     objects = models.Manager()
 
+
 from libs.signals import slug_pre_save
 
 signals.pre_save.connect(slug_pre_save, sender=Customer)
+signals.pre_save.connect(slug_pre_save, sender=Job)

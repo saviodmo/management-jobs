@@ -39,7 +39,7 @@
                 </td>
                 <td>{{ customer_job.dtt_start|date:'d/m/Y' }}</td>
                 <td>{{ customer_job.dtt_end|date:'d/m/Y' }}</td>
-                <td>R$ {{ customer_job.job.price|floatformat:"2"|intcomma }}</td>
+                <td>R$ {{ customer_job.job.price|floatformat:"2" }}</td>
             </tr>
         {% endfor %}
         </tbody>
