@@ -6,32 +6,31 @@
     <div class="row justify-content-center">
         <div class="col-6">
             <div class="display-6" style="text-align: center;">Alterar Cliente</div>
-            <form>
+            <form name="new-customer" id="new-customer" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="text-danger">{{ form.non_fields_errors }}</div>
+
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                    <input type="text" id="form4Example1" class="form-control" value="{{ customer.name }}"/>
-                    <label class="form-label" for="form4Example1">Nome</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ form.name.value|default_if_none:'' }}"/>
+                    <label class="form-label" for="name">Nome</label>
                 </div>
 
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="email" id="form4Example2" class="form-control" value="{{ customer.email }}"/>
-                    <label class="form-label" for="form4Example2">E-mail</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ form.email.value|default_if_none:'' }}"/>
+                    <label class="form-label" for="email">E-mail</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input type="text" id="form4Example1" class="form-control" value="{{ customer.phone }}"/>
-                    <label class="form-label" for="form4Example1">Telefone</label>
+                    <input type="text" name="phone" id="phone" class="form-control" value="{{ form.phone.value|default_if_none:'' }}"/>
+                    <label class="form-label" for="phone">Telefone</label>
                 </div>
 
                 <!-- Checkbox -->
                 <div class="form-check d-flex justify-content-start mb-4">
-                    {% if customer.active %}
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked/>
-                    {% else %}
-                        <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" />
-                    {% endif %}
-                    <label class="form-check-label" for="form4Example4">
+                    <input class="form-check-input me-2" type="checkbox" value="{{ form.active.value|default_if_none:True }}" name="active" id="active" checked/>
+                    <label class="form-check-label" for="active">
                         Ativo
                     </label>
                 </div>

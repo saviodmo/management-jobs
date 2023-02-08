@@ -2,6 +2,7 @@ from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
 from .models import Customer, Job
+from .forms import FormCustomer
 
 
 def index(request):
@@ -35,10 +36,19 @@ def customer_job(request, slug):
 def edit_customer(request, slug):
     context = {}
     customer = get_object_or_404(Customer, slug=slug)
-
-    context['customer'] = customer
-
     template_name = 'customer/edit_customer.html'
+
+    if request.method == 'POST':
+        form = FormCustomer(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            form = FormCustomer(instance=customer)
+            context['slug'] = customer.slug
+            context['success'] = True
+    else:
+        form = FormCustomer(instance=customer)
+
+    context['form'] = form
 
     return render(request, template_name, context)
 
@@ -46,6 +56,18 @@ def edit_customer(request, slug):
 def add_customer(request):
     context = {}
     template_name = 'customer/add_customer.html'
+
+    if request.method == 'POST':
+        form = FormCustomer(request.POST)
+        if form.is_valid():
+            form.save()
+            context['success'] = True
+            form = FormCustomer()
+    else:
+        form = FormCustomer()
+
+    context['form'] = form
+
     return render(request, template_name, context)
 
 
